@@ -24,8 +24,7 @@ public class CountryService implements ICountryService{
     @Override
     public CountryResponseDto getCountryByAlpha3Code(String alpha3Code) {
 
-        // do validation for alpha3code before
-
+        validateAlpha3Code(alpha3Code);
 
         Country country = countryRepository.findById(alpha3Code)
                 .orElseGet(() -> fetchAndSaveCountryFromApi(alpha3Code));
@@ -43,5 +42,11 @@ public class CountryService implements ICountryService{
 
         Country country = countryMapper.mapToEntity(apiResponse);
         return countryRepository.save(country);
+    }
+
+    private void validateAlpha3Code(String alpha3Code) {
+        if (alpha3Code == null || alpha3Code.length() != 3 || !alpha3Code.matches("[A-Za-z]{3}")) {
+            throw new IllegalArgumentException("Invalid alpha3Code: " + alpha3Code);
+        }
     }
 }

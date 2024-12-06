@@ -43,7 +43,7 @@ public class CountryMapper {
         responseDto.setCapital(country.getCapital());
         responseDto.setBorders(country.getBorders());
         responseDto.setTimezones(country.getTimezones());
-        responseDto.setCurrencies(mapToCurrencyDtos(country.getCurrencies()));
+        responseDto.setCurrencies(mapToCurrencyDto(country.getCurrencies()));
         responseDto.setLanguages(country.getLanguages());
 
         return responseDto;
@@ -61,7 +61,7 @@ public class CountryMapper {
         return nameDto;
     }
 
-    private Map<String, CurrencyDto> mapToCurrencyDtos(Map<String, Currency> currencies) {
+    private Map<String, CurrencyDto> mapToCurrencyDto(Map<String, Currency> currencies) {
         if (currencies == null) {
             return new HashMap<>();
         }

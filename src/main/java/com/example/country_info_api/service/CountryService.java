@@ -31,7 +31,7 @@ public class CountryService implements ICountryService{
                 .orElseGet(() -> fetchAndSaveCountryFromApi(alpha3Code));
 
 
-        return null;
+        return countryMapper.mapToResponseDto(country);
     }
 
     private Country fetchAndSaveCountryFromApi(String alpha3Code) {

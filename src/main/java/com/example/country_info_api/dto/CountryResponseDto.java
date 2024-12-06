@@ -1,5 +1,6 @@
 package com.example.country_info_api.dto;
 
+
 import lombok.Data;
 
 import java.util.List;

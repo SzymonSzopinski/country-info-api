@@ -25,4 +25,9 @@ public class CountryController {
         return ResponseEntity.ok(countryResponse);
     }
 
+    @GetMapping({"/", ""})
+    public ResponseEntity<String> handleRootRequest() {
+        throw new IllegalArgumentException("Country code is missing. Please provide a valid alpha3Code.");
+    }
+
 }

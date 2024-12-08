@@ -1,0 +1,7 @@
+com/example/country_info_api/CountryApiClientTest.class
+com/example/country_info_api/CountryMapperTest.class
+com/example/country_info_api/CountryControllerTest.class
+com/example/country_info_api/GlobalExceptionHandlerTest.class
+com/example/country_info_api/CountryControllerIntegrationTest.class
+com/example/country_info_api/CountryServiceTest.class
+com/example/country_info_api/CountryInfoApiApplicationTests.class

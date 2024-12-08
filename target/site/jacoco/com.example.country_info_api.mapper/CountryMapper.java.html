@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CountryMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">country-info-api</a> &gt; <a href="index.source.html" class="el_package">com.example.country_info_api.mapper</a> &gt; <span class="el_source">CountryMapper.java</span></div><h1>CountryMapper.java</h1><pre class="source lang-java linenums">package com.example.country_info_api.mapper;
+
+import com.example.country_info_api.dto.CountryResponseDto;
+import com.example.country_info_api.dto.CurrencyDto;
+import com.example.country_info_api.dto.NameDto;
+import com.example.country_info_api.dto.RestCountryResponseDto;
+import com.example.country_info_api.model.Country;
+import com.example.country_info_api.model.Currency;
+import com.example.country_info_api.model.Name;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
+<span class="fc" id="L16">public class CountryMapper {</span>
+
+    public Country mapToEntity(RestCountryResponseDto response) {
+<span class="fc" id="L19">        Country country = new Country();</span>
+
+<span class="fc" id="L21">        country.setAlpha3Code(response.getCca3());</span>
+<span class="fc" id="L22">        country.setName(mapToName(response.getName()));</span>
+<span class="fc" id="L23">        country.setRegion(response.getRegion());</span>
+<span class="fc" id="L24">        country.setSubregion(response.getSubregion());</span>
+<span class="fc" id="L25">        country.setPopulation(response.getPopulation());</span>
+<span class="fc" id="L26">        country.setCapital(response.getCapital());</span>
+<span class="fc" id="L27">        country.setBorders(response.getBorders());</span>
+<span class="fc" id="L28">        country.setTimezones(response.getTimezones());</span>
+<span class="fc" id="L29">        country.setCurrencies(mapToCurrencies(response.getCurrencies()));</span>
+<span class="fc" id="L30">        country.setLanguages(response.getLanguages());</span>
+
+<span class="fc" id="L32">        return country;</span>
+    }
+
+    public CountryResponseDto mapToResponseDto(Country country) {
+
+<span class="fc" id="L37">        CountryResponseDto responseDto = new CountryResponseDto();</span>
+
+<span class="fc" id="L39">        responseDto.setName(mapToNameDto(country.getName()));</span>
+<span class="fc" id="L40">        responseDto.setRegion(country.getRegion());</span>
+<span class="fc" id="L41">        responseDto.setSubregion(country.getSubregion());</span>
+<span class="fc" id="L42">        responseDto.setPopulation(country.getPopulation());</span>
+<span class="fc" id="L43">        responseDto.setCapital(country.getCapital());</span>
+<span class="fc" id="L44">        responseDto.setBorders(country.getBorders());</span>
+<span class="fc" id="L45">        responseDto.setTimezones(country.getTimezones());</span>
+<span class="fc" id="L46">        responseDto.setCurrencies(mapToCurrencyDto(country.getCurrencies()));</span>
+<span class="fc" id="L47">        responseDto.setLanguages(country.getLanguages());</span>
+
+<span class="fc" id="L49">        return responseDto;</span>
+    }
+
+
+    private Name mapToName(NameDto nameDto) {
+<span class="fc" id="L54">        return new Name(nameDto.getCommon(), nameDto.getOfficial());</span>
+    }
+
+    private NameDto mapToNameDto(Name name) {
+<span class="fc" id="L58">        NameDto nameDto = new NameDto();</span>
+<span class="fc" id="L59">        nameDto.setCommon(name.getCommon());</span>
+<span class="fc" id="L60">        nameDto.setOfficial(name.getOfficial());</span>
+<span class="fc" id="L61">        return nameDto;</span>
+    }
+
+    private Map&lt;String, CurrencyDto&gt; mapToCurrencyDto(Map&lt;String, Currency&gt; currencies) {
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (currencies == null) {</span>
+<span class="nc" id="L66">            return new HashMap&lt;&gt;();</span>
+        }
+
+<span class="fc" id="L69">        Map&lt;String, CurrencyDto&gt; currencyDtoMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L70">        currencies.forEach((currencyCode, currency) -&gt; {</span>
+<span class="fc" id="L71">            CurrencyDto currencyDto = new CurrencyDto();</span>
+<span class="fc" id="L72">            currencyDto.setName(currency.getName());</span>
+<span class="fc" id="L73">            currencyDto.setSymbol(currency.getSymbol());</span>
+<span class="fc" id="L74">            currencyDtoMap.put(currencyCode, currencyDto);</span>
+<span class="fc" id="L75">        });</span>
+<span class="fc" id="L76">        return currencyDtoMap;</span>
+    }
+
+    private Map&lt;String, Currency&gt; mapToCurrencies(Map&lt;String, CurrencyDto&gt; dtoCurrencies) {
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        if (dtoCurrencies == null) {</span>
+<span class="nc" id="L81">            return new HashMap&lt;&gt;();</span>
+        }
+
+<span class="fc" id="L84">        Map&lt;String, Currency&gt; currencies = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L85">        dtoCurrencies.forEach((currencyCode, currencyDto) -&gt; {</span>
+<span class="fc" id="L86">            Currency currency = new Currency();</span>
+<span class="fc" id="L87">            currency.setName(currencyDto.getName());</span>
+<span class="fc" id="L88">            currency.setSymbol(currencyDto.getSymbol());</span>
+<span class="fc" id="L89">            currencies.put(currencyCode, currency);</span>
+<span class="fc" id="L90">        });</span>
+<span class="fc" id="L91">        return currencies;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

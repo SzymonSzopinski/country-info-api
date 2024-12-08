@@ -138,25 +138,37 @@ curl -X GET http://localhost:8080/api/countries/POL
 **Response Example**:
 ```json
 {
-  "name": {
-    "common": "Poland",
-    "official": "Republic of Poland"
-  },
-  "currencies": {
-    "PLN": {
-      "name": "Polish Zloty",
-      "symbol": "zł"
-    }
-  },
-  "capital": ["Warsaw"],
-  "region": "Europe",
-  "subregion": "Eastern Europe",
-  "languages": {
-    "pol": "Polish"
-  },
-  "population": 38000000,
-  "borders": ["DEU", "CZE", "SVK", "UKR", "BLR", "LTU", "RUS"],
-  "timezones": ["UTC+01:00"]
+    "name": {
+        "common": "Poland",
+        "official": "Republic of Poland"
+    },
+    "currencies": {
+        "PLN": {
+            "name": "Polish złoty",
+            "symbol": "zł"
+        }
+    },
+    "capital": [
+        "Warsaw"
+    ],
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "languages": {
+        "pol": "Polish"
+    },
+    "population": 37950802,
+    "borders": [
+        "BLR",
+        "CZE",
+        "DEU",
+        "LTU",
+        "RUS",
+        "SVK",
+        "UKR"
+    ],
+    "timezones": [
+        "UTC+01:00"
+    ]
 }
 ```
 
